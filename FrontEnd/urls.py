@@ -14,7 +14,7 @@ urlpatterns=[
     path('rateus/',views.rateus,name="rateus"),
     path('loginout/',views.loginout,name="loginout"),
     path('savesignup/',views.savesignup,name="savesignup"),
-    path('editprofile/',views.editprofile,name="editprofile"),
+    path('editprofile/<int:dataid>/',views.editprofile,name="editprofile"),
     path('filtertype/<pro1_name>/', views.filtertype, name="filtertype"),
     path('userloginout/', views.userloginout, name="userloginout"),
     path('saveusersignup/', views.saveusersignup, name="saveusersignup"),
@@ -25,6 +25,7 @@ urlpatterns=[
     path('employeeupload/', views.employeeupload, name="employeeupload"),
     path('saveproperty/', views.saveproperty, name="saveproperty"),
     path('myproperties/', views.myproperties, name="myproperties"),
+    path('updateuser/', views.updateuser, name="updateuser"),
 
 
 ]

@@ -130,15 +130,34 @@
                   alt="Image"
                   class="img-fluid rounded-circle w-25 mb-4"
                 />
-                   {% endif %}
+
 
 <!--                   <li >-->
 <!--                     {{ request.session.uusername }}-->
 <!--                   </li>-->
+                   {% endif %}
+
 
                    <div style="margin-top:-10px">
+                     <a href="# " id="edit1"  >Edit<span class="glyphicon glyphicon-pencil" style="margin-left:5px"></span></a>
 
-                   <a href="{% url 'editprofile' %}" >Edit<span class="glyphicon glyphicon-pencil" style="margin-left:5px"></span></a>
+
+                     {% for i in data7 %}
+
+                     <form action="{% url 'editprofile' dataid=i.id %}">
+                       <button type="submit" id="edit2"> edit </button>
+                     </form>
+
+                     {% endfor %}
+
+
+
+
+
+
+
+
+
 
 
                    </div>
@@ -1076,6 +1095,15 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </div>
+
+
+    <script>
+      let edit2=document.getElementById("edit1");
+      let edit1=document.getElementById("edit2");
+
+      edit1.onchange=function(){
+      edit2.src=URL.createObjectURL(type:submit);
+    </script>
 
     <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'assets/js/tiny-slider.js' %}"></script>

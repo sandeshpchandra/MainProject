@@ -344,6 +344,7 @@ Dubai
               <h2>
                 Edit
               </h2>
+
               <img
                   src="{{ request.session.uimage.url }}"
                   alt="Image"
@@ -351,8 +352,13 @@ Dubai
 
                 />
 
+
+
+
+
+
               <div style="text-align:center;">
-            <form method="post" action="#">
+            <form method="post" action="{% url 'updateuser' %}" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="row">
                 <div class="col-6 mb-3">
@@ -385,7 +391,7 @@ Dubai
                     placeholder="Your Email"
                     name="uemail"
                     style="width:400px"
-                    value="{{ request.session.uemail }}"
+                    value="{{ request.session.user_data.uemail }}"
                   />
                 </div>
                 <div class="col-6 mb-3" style="margin-top:240px;margin-left:-95px" >

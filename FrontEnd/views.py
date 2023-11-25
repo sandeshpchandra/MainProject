@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render,redirect
-
+from django.utils.datastructures import MultiValueDictKeyError
 
 from FrontEnd.models import contactdb, useremployeedb,usersignupdb
 from MainApp.models import employeedb, propertydb, propertytypedb, propertyareadb, selltypedb
@@ -80,10 +81,9 @@ def savesignup(request):
 
 
 
-def editprofile(request):
-    data = usersignupdb.objects.filter(uusername=request.session['uusername'])
-    return render(request,"editprofile.html",{'data':data})
-
+def editprofile(request,dataid):
+    data7=usersignupdb.objects.get(id=dataid)
+    return render(request, 'editprofile.html',{'data7':data7})
 
 
 def filtertype(request,pro1_name):
@@ -202,6 +202,26 @@ def saveproperty(request):
 def myproperties(request):
     data1 = propertydb.objects.all()
     return render(request,"myproperties.html",{'data1':data1})
+
+
+
+
+def updateuser(request, dataid):
+    if request.method == 'POST':
+        un = request.POST.get('uname')
+        ub = request.POST.get('unumber')
+        ue = request.POST.get('uemail')
+        us = request.POST.get('uusername')
+        up = request.POST.get('upassword')
+        uc = request.POST.get('confirmpass')
+        try:
+            img=request.FILES['uimage']
+            fs = FileSystemStorage()
+            file = fs.save(img.name, img)
+        except MultiValueDictKeyError:
+            file = usersignupdb.objects.get(id=dataid).uimage
+        usersignupdb.objects.filter(id=dataid).update(uname=un, unumber=ub, uemail=ue, uusername=us, upassword=up, confirmpass=uc,uimage=file)
+        return redirect(editprofile)
 
 
 
